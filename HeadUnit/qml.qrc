@@ -3,12 +3,15 @@
         <file>main.qml</file>
         <file>setting_page.qml</file>
         <file>map_page.qml</file>
+        <file>music_page.qml</file>
+        <file>media_page.qml</file>
                 
         <file>HU_Assets/Background/car_status_background.png</file>
         <file>HU_Assets/Background/progress_bar.png</file>
         <file>HU_Assets/Background/main_control_bar.png</file>
         <file>HU_Assets/Background/basic_window.png</file>
         
+        <file>HU_Assets/Icons/person.png</file>
         <file>HU_Assets/Icons/home.png</file>
         <file>HU_Assets/Icons/map.png</file>
         <file>HU_Assets/Icons/media.png</file>
@@ -16,5 +19,7 @@
         <file>HU_Assets/Icons/settings.png</file>
         <file>HU_Assets/Icons/icon_line.png</file>
         <file>HU_Assets/Icons/tap_close_button.png</file>
+        
+        <file>HU_Assets/Components/line.png</file>
     </qresource>
 </RCC>

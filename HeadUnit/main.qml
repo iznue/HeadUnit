@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
+import timeprovider 1.0
 
 Window {
     id: main_window
@@ -25,15 +26,289 @@ Window {
             fillMode: Image.PreserveAspectFit
             source: "HU_Assets/Background/progress_bar.png"
 
-            Text {
-                id: speed_value
-                horizontalAlignment: Text.AlignHCenter
-                anchors.centerIn: parent
+            Rectangle {
+                id: speed_info
+                x: 95
+                y: 58
                 width: 70
                 height: 70
-                font.pixelSize: 48
-                color: "#ffffff"
-                text: qsTr("75")
+                color: "transparent"
+
+                Text {
+                    id: speed_value
+                    horizontalAlignment: Text.AlignHCenter
+                    width: 70
+                    height: 50
+                    font.pixelSize: 48
+                    color: "#ffffff"
+                    text: qsTr("75")
+                    anchors.verticalCenterOffset: -10
+                    anchors.horizontalCenterOffset: 0
+                }
+
+                Text {
+                    id: cm_s
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors{
+                        top: speed_value.bottom
+                    }
+                    width: 70
+                    height: 20
+                    text: qsTr("cm/s")
+                    font.pixelSize: 20
+                    color: "#ffffff"
+                }
+            }
+        }
+
+
+        Rectangle {
+            id: car_status_info
+            x: 25
+            y: 180
+            width: 330
+            height: 35
+            color: "transparent"
+
+            Rectangle {
+                id: average
+                anchors.left: car_status_info.left
+                width: 95
+                height: 35
+                color: "transparent"
+
+                Text {
+                    id: sa_value
+                    width: 48
+                    height: 23
+                    text: qsTr("128")
+                    color: "#ffffff"
+                    font.pixelSize: 20
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors{
+                        left: average.left
+                        top: average.top
+                    }
+                }
+
+                Text {
+                    id: sa_scale
+                    width: 48
+                    height: 15
+                    text: qsTr("cm/s")
+                    color: "#ffffff"
+                    font.pixelSize: 9
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors{
+                        left: average.left
+                        bottom: average.bottom
+                        bottomMargin: -2
+                    }
+                }
+
+                Text {
+                    id: text_speed
+                    text: qsTr("Speed")
+                    color: "#ffffff"
+                    font.pixelSize: 10
+                    horizontalAlignment: Text.AlignRight
+                    anchors{
+                        right: average.right
+                        top: average.top
+                        topMargin: 5
+                    }
+                }
+
+                Text {
+                    id: text_average
+                    text: qsTr("Average")
+                    color: "#ffffff"
+                    font.pixelSize: 11
+                    horizontalAlignment: Text.AlignRight
+                    anchors{
+                        right: average.right
+                        bottom: average.bottom
+                    }
+                }
+            }
+
+            Rectangle {
+                id: mileage
+                x: 0
+                y: 0
+                width: 95
+                height: 35
+                color: "#00000000"
+                anchors.leftMargin: 122
+                anchors.left: car_status_info.left
+
+                Text {
+                    id: m_value
+                    width: 48
+                    height: 23
+                    color: "#ffffff"
+                    text: qsTr("36.56")
+                    font.pixelSize: 18
+                    anchors.top: mileage.top
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.left: mileage.left
+                }
+
+                Text {
+                    id: m_scale
+                    width: 48
+                    height: 15
+                    color: "#ffffff"
+                    text: qsTr("m")
+                    anchors.bottom: mileage.bottom
+                    font.pixelSize: 9
+                    anchors.bottomMargin: -2
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.left: mileage.left
+                }
+
+                Text {
+                    id: text_remaining
+                    color: "#ffffff"
+                    text: qsTr("Remaining")
+                    anchors.topMargin: 5
+                    font.pixelSize: 9
+                    anchors.right: mileage.right
+                    anchors.top: mileage.top
+                    horizontalAlignment: Text.AlignRight
+                }
+
+                Text {
+                    id: text_mileage
+                    color: "#ffffff"
+                    text: qsTr("Mileage")
+                    anchors.bottom: mileage.bottom
+                    font.pixelSize: 11
+                    anchors.right: mileage.right
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+
+            Rectangle {
+                id: time
+                x: -4
+                y: 0
+                width: 88
+                height: 35
+                color: "#00000000"
+                anchors.left: car_status_info.left
+                anchors.leftMargin: 228
+                Text {
+                    id: t_value
+                    width: 48
+                    height: 23
+                    color: "#ffffff"
+                    text: qsTr("20")
+                    font.pixelSize: 18
+                    anchors.top: time.top
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.left: time.left
+                }
+
+                Text {
+                    id: t_scale
+                    width: 48
+                    height: 15
+                    color: "#ffffff"
+                    text: qsTr("min")
+                    anchors.bottom: time.bottom
+                    anchors.bottomMargin: -2
+                    font.pixelSize: 9
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.left: time.left
+                }
+
+                Text {
+                    id: text_remaining1
+                    color: "#ffffff"
+                    text: qsTr("Remaining")
+                    anchors.topMargin: 5
+                    font.pixelSize: 9
+                    anchors.right: time.right
+                    anchors.top: time.top
+                    horizontalAlignment: Text.AlignRight
+                }
+
+                Text {
+                    id: text_time
+                    color: "#ffffff"
+                    text: qsTr("Time")
+                    anchors.bottom: time.bottom
+                    font.pixelSize: 11
+                    anchors.right: time.right
+                    horizontalAlignment: Text.AlignRight
+                }
+            }
+
+            Image {
+                id: line1
+                x: 111
+                y: -3
+                fillMode: Image.PreserveAspectFit
+                source: "HU_Assets/Components/line.png"
+            }
+
+            Image {
+                id: line2
+                x: 228
+                y: -3
+                fillMode: Image.PreserveAspectFit
+                source: "HU_Assets/Components/line.png"
+            }
+        }
+
+
+        Rectangle {
+            id: gear_selection
+            x: 110
+            y: 442
+            width: 160
+            height: 60
+            color: "transparent"
+
+            property string currentGear: "N"
+
+            Row {
+                id: gear_list
+                anchors.centerIn: parent
+                spacing: 15
+
+                Text {
+                    id: p
+                    text: qsTr("P")
+                    font.pixelSize: 30
+                    color: "#959595"
+                    //                        color: currentGear === "P" ? Qt.rgba(0.53, 0.95, 0.82, 1) : Qt.rgba(0.58, 0.58, 0.58, 1)
+                }
+
+                Text {
+                    id: r
+                    text: qsTr("R")
+                    font.pixelSize: 30
+                    color: "#959595"
+                    //                        color: currentGear === "R" ? "#87F1D0" : "#959595"
+                }
+
+                Text {
+                    id: n
+                    text: qsTr("N")
+                    font.pixelSize: 30
+                    color: "#87F1D0"
+                    //                        color: currentGear === "N" ? "#87F1D0" : "#959595"
+                }
+
+                Text {
+                    id: d
+                    text: qsTr("D")
+                    font.pixelSize: 30
+                    color: "#959595"
+                    //                        color: currentGear === "D" ? "#87F1D0" : "#959595"
+                }
             }
         }
     }
@@ -69,6 +344,58 @@ Window {
         color: "#323232"
     }
 
+    // time view
+    TimeProvider{
+        id: timeProvider
+    }
+
+    Text {
+        id: timeText
+        x: 865
+        y: 10
+        text: timeProvider.currentTime
+        font.pixelSize: 15
+        color: "#ffffff"
+    }
+
+    Connections { // when timeChanged occurs, update time
+        target: timeProvider
+        onTimeChanged: timeText.text = timeProvider.currentTime
+    }
+
+    // user name
+    Rectangle{
+        id: user_info
+        color: "transparent"
+        x: 940
+        y: 10
+        width: 70
+        height: 17
+
+        Image {
+            id: user_icon
+            anchors{
+                top: user_info.top
+                left: user_info.left
+                topMargin: 2
+            }
+            fillMode: Image.PreserveAspectFit
+            source: "HU_Assets/Icons/person.png"
+        }
+
+        Text {
+            id: user_name
+            width: 54
+            anchors{
+                left: user_icon.right
+                leftMargin: 5
+            }
+            text: qsTr("Team02")
+            color: "#ffffff"
+            font.pixelSize: 15
+        }
+
+    }
 
     /////////////////////////////////////////////////////////////////////// main control bar
     Image {
@@ -93,8 +420,6 @@ Window {
                 source: "HU_Assets/Icons/icon_line.png"
                 x: 138
                 y: 40
-//                anchors.horizontalCenter: parent.horizontalCenter
-//                anchors.bottom: parent.bottom
             }
 
             Row{
@@ -108,7 +433,6 @@ Window {
                     source: "HU_Assets/Icons/settings.png"
                     width: 36
                     height: 36
-
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
@@ -145,7 +469,6 @@ Window {
                     source: "HU_Assets/Icons/home.png"
                     width: 36
                     height: 36
-
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
@@ -160,6 +483,16 @@ Window {
                     source: "HU_Assets/Icons/music.png"
                     width: 36
                     height: 36
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            icon_line.x = 213;
+                            musicQmlLoader.active = true;
+                            musicQmlLoader.item.visible = true;
+                            musicQmlLoader.item.x = main_window.x + 393;
+                            musicQmlLoader.item.y = main_window.y + 40;
+                        }
+                    }
                 }
 
                 Image {
@@ -168,6 +501,16 @@ Window {
                     source: "HU_Assets/Icons/media.png"
                     width: 36
                     height: 36
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            icon_line.x = 285;
+                            mediaQmlLoader.active = true;
+                            mediaQmlLoader.item.visible = true;
+                            mediaQmlLoader.item.x = main_window.x + 393;
+                            mediaQmlLoader.item.y = main_window.y + 40;
+                        }
+                    }
                 }
             }
         }
@@ -191,6 +534,26 @@ Window {
         visible: false
         onLoaded: {
             mapQmlLoader.item.visible = false;
+        }
+    }
+
+    Loader{
+        id: musicQmlLoader
+        source: "music_page.qml"
+        active: false
+        visible: false
+        onLoaded: {
+            musicQmlLoader.item.visible = false;
+        }
+    }
+
+    Loader{
+        id: mediaQmlLoader
+        source: "media_page.qml"
+        active: false
+        visible: false
+        onLoaded: {
+            mediaQmlLoader.item.visible = false;
         }
     }
 }

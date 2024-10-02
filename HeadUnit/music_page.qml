@@ -2,10 +2,8 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 
 Window{
-    id: setting_window
+    id: music_window
     visible: true
-//    x: 565
-//    y: 195
     width: 618
     height: 480
     color: "transparent"
@@ -30,7 +28,7 @@ Window{
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                setting_window.visible = false;
+                music_window.visible = false;
                 icon_line.x = 138;
             }
         }

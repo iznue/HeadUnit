@@ -1,7 +1,10 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
+import QtLocation 5.12
+import QtPositioning 5.12
 
-Window{
+ApplicationWindow{
     id: map_window
     visible: true
     width: 618
@@ -9,11 +12,34 @@ Window{
     color: "transparent"
     flags: Qt.FramelessWindowHint
 
-    Image {
-        id: image
-        fillMode: Image.PreserveAspectFit
+    Rectangle {
+        id: base_window
         anchors.fill: parent
-        source: "HU_Assets/Background/basic_window.png"
+        radius: 15
+
+        Map {
+            anchors.fill: base_window
+            zoomLevel: 15
+
+            plugin: Plugin{
+                name: "osm"
+                PluginParameter{
+                    name: "osm.mapping.providersrepository.address"
+                    value: "https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=adf1b85f20044f738f928e712b208a46"
+                }
+                PluginParameter { name: "osm.mapping.highdpi_tiles"; value: true }
+            }
+
+            // check the list of map types
+//            Component.onCompleted: {
+//                for (var i=0; i<supportedMapTypes.legnth; i++){
+//                    console.log("Map type " + i + ": " + supportedMapTypes[i].name + " - " + supportedMapTypes[i].description)
+//                }
+//            }
+
+            center: QtPositioning.coordinate(52.42496895298135, 10.791952483241028) // SEA:ME Lab coordinate
+            activeMapType: supportedMapTypes[0] // use "Cycle" map type
+        }
     }
 
     Image {
