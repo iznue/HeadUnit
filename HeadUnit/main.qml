@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
-import timeprovider 1.0
+//import timeprovider 1.0
 
 Window {
     id: main_window
@@ -41,7 +41,7 @@ Window {
                     height: 50
                     font.pixelSize: 48
                     color: "#ffffff"
-                    text: qsTr("75")
+                    text: speedProvider.currentSpeed    //qsTr("75")
                     anchors.verticalCenterOffset: -10
                     anchors.horizontalCenterOffset: 0
                 }
@@ -58,6 +58,12 @@ Window {
                     font.pixelSize: 20
                     color: "#ffffff"
                 }
+            }
+        }
+        Connections{
+            target: speedProvider
+            onSpeedChanged: {
+                speed_value.text = speedProvider.currentSpeed
             }
         }
 
@@ -311,17 +317,76 @@ Window {
                 }
             }
         }
+
+
+        Rectangle {
+            id: battery_component
+            x: 303
+            y: 15
+            width: 61
+            height: 13
+            color: "transparent"
+
+            Image {
+                id: battery_img
+                width: 30
+                fillMode: Image.PreserveAspectFit
+                source: "HU_Assets/Components/battery.png"
+                anchors.right: battery_component.right
+            }
+
+            Text {
+                id: battery_value
+                text: qsTr("90%")
+                font.pixelSize: 12
+                color: "#ffffff"
+                anchors.left: battery_component.left
+            }
+        }
     }
 
     /////////////////////////////////////////////////////////////////////// basic page
     Rectangle {
-        id: climate_component
+        id: weather_component
         x: 438
         y: 92
         width: 240
         height: 220
         radius: 15
         color: "#323232"
+
+        Text {
+            id: climate
+            x: 24
+            y: 18
+            text: qsTr("Climate")
+            font.pixelSize: 23
+            color: "#ffffff"
+        }
+
+        Text {
+            id: tempLabel
+            x: 18
+            y: 79
+            text: weatherProvider.temperature
+            horizontalAlignment: Text.AlignLeft
+            font.pixelSize: 35
+            color: "#ffffff"
+        }
+
+        Text {
+            id: cityLabel
+            x: 24
+            y: 125
+            text: weatherProvider.cityName
+            horizontalAlignment: Text.AlignLeft
+            font.pixelSize: 20
+            color: "#ffffff"
+        }
+
+    }
+    Component.onCompleted: { // initial setting
+        weatherProvider.cityName = "Wolfsburg";
     }
 
     Rectangle {
@@ -345,9 +410,9 @@ Window {
     }
 
     // time view
-    TimeProvider{
-        id: timeProvider
-    }
+    //    TimeProvider{ // with qmlRegisterType
+    //        id: timeProvider
+    //    }
 
     Text {
         id: timeText
@@ -556,4 +621,7 @@ Window {
             mediaQmlLoader.item.visible = false;
         }
     }
+
 }
+
+

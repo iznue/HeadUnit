@@ -6,7 +6,8 @@
 #include <QTimeZone>
 #include <QLocale>
 
-class TimeProvider : public QObject {
+// time setting
+class TimeProvider : public QObject{
     Q_OBJECT
     Q_PROPERTY(QString currentTime READ currentTime NOTIFY timeChanged)
 
@@ -21,5 +22,28 @@ signals:
 protected:
     void timerEvent(QTimerEvent *event) override;
 };
+
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+// get speed value
+class SpeedProvider : public QObject{
+    Q_OBJECT
+    Q_PROPERTY(int currentSpeed READ currentSpeed NOTIFY speedChanged)
+
+public:
+    explicit SpeedProvider(QObject *parent = nullptr);
+
+    int currentSpeed() const;
+    void setCurrentSpeed(const int &speed);
+
+signals:
+    void speedChanged();
+
+protected:
+    void timerEvent(QTimerEvent *s_event) override;
+
+private:
+    int m_currentSpeed;
+};
+
 
 #endif // BASIC_FUNC_H

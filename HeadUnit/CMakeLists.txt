@@ -30,14 +30,20 @@ if(ANDROID)
     add_library(HeadUnit SHARED
       main.cpp
       basic_func.h
+      weather_provider.h
+
       basic_func.cpp
+
       qml.qrc
     )
 else()
     add_executable(HeadUnit
       main.cpp
       basic_func.h
+      weather_provider.h
+
       basic_func.cpp
+
       qml.qrc
     )
 endif()

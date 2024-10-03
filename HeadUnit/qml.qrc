@@ -21,5 +21,6 @@
         <file>HU_Assets/Icons/tap_close_button.png</file>
         
         <file>HU_Assets/Components/line.png</file>
+        <file>HU_Assets/Components/battery.png</file>
     </qresource>
 </RCC>
