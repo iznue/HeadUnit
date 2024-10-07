@@ -24,13 +24,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick REQUIRED Multimedia)
 
 if(ANDROID)
     add_library(HeadUnit SHARED
       main.cpp
       basic_func.h
       weather_provider.h
+      music_player.h
 
       basic_func.cpp
 
@@ -41,6 +42,7 @@ else()
       main.cpp
       basic_func.h
       weather_provider.h
+      music_player.h
 
       basic_func.cpp
 
@@ -51,4 +53,5 @@ endif()
 target_compile_definitions(HeadUnit
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(HeadUnit
-  PRIVATE Qt5::Core Qt5::Quick)
+  PRIVATE Qt5::Core Qt5::Quick
+  Qt5::Multimedia)

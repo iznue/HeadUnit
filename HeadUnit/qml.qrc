@@ -10,7 +10,9 @@
         <file>HU_Assets/Background/progress_bar.png</file>
         <file>HU_Assets/Background/main_control_bar.png</file>
         <file>HU_Assets/Background/basic_window.png</file>
+        <file>HU_Assets/Background/menu_bar.png</file>
         
+        <!-- main_home page -->
         <file>HU_Assets/Icons/person.png</file>
         <file>HU_Assets/Icons/home.png</file>
         <file>HU_Assets/Icons/map.png</file>
@@ -20,7 +22,14 @@
         <file>HU_Assets/Icons/icon_line.png</file>
         <file>HU_Assets/Icons/tap_close_button.png</file>
         
+        <!-- setting page -->
+        <file>HU_Assets/Icons/user_phone.png</file>
+        <file>HU_Assets/Icons/display.png</file>
+        <file>HU_Assets/Icons/service.png</file>
+        
         <file>HU_Assets/Components/line.png</file>
         <file>HU_Assets/Components/battery.png</file>
+        <file>HU_Assets/Components/Weather/weather_bar.png</file>
+        <file>HU_Assets/Components/Weather/climate_fan.png</file>
     </qresource>
 </RCC>

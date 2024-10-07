@@ -67,7 +67,7 @@ Window {
             }
         }
 
-
+        ///////////////////////////////////////////////////////////////// status info
         Rectangle {
             id: car_status_info
             x: 25
@@ -268,7 +268,7 @@ Window {
             }
         }
 
-
+        ///////////////////////////////////////////////////////////////// gear
         Rectangle {
             id: gear_selection
             x: 110
@@ -318,7 +318,7 @@ Window {
             }
         }
 
-
+        ///////////////////////////////////////////////////////////////// battery
         Rectangle {
             id: battery_component
             x: 303
@@ -346,6 +346,8 @@ Window {
     }
 
     /////////////////////////////////////////////////////////////////////// basic page
+
+    ///////////////////////////////////////////////////////////////// weather_component
     Rectangle {
         id: weather_component
         x: 438
@@ -384,11 +386,72 @@ Window {
             color: "#ffffff"
         }
 
+        Rectangle {
+            id: temperatureBar
+            x: 20
+            y: 189
+            width: 200
+            height: 5
+            color: "transparent"
+
+            Rectangle {
+                id: temp_range
+                x: 0
+                y:0
+                width: 200
+                height: 5
+                color: "#ffffff"
+                radius: 10
+            }
+
+            Rectangle {
+                id: temp_bar
+                color: "#03A49A"
+                width: (weatherProvider.temperature.toDouble() + 20) / 60 * parent.width // range : -20 ~ 40
+                height: parent.height
+                radius: 10
+            }
+
+            Image {
+                id: temp_fan
+                x: temp_bar.width - 12.5
+                y: temp_bar.y - 9
+                source: "HU_Assets/Components/Weather/climate_fan.png"
+                fillMode: Image.PreserveAspectFit
+            }
+
+            Text {
+                id: min_range
+                x: 1
+                y: -22
+                text: qsTr("-20°C")
+                font.pixelSize: 13
+                color: "#87888C"
+            }
+
+            Text {
+                id: max_range
+                x: 173
+                y: -22
+                text: qsTr("40°C")
+                font.pixelSize: 13
+                color: "#87888C"
+            }
+        }
+
+        Connections {
+            target: weatherProvider
+            onTemperatureChanged: {
+                temp_bar.width = (parseFloat(weatherProvider.temperature) + 20) / 60 * temperatureBar.width
+            }
+        }
+
     }
     Component.onCompleted: { // initial setting
         weatherProvider.cityName = "Wolfsburg";
     }
 
+    ///////////////////////////////////////////////////////////////// calender_component
     Rectangle {
         id: calender_component
         x: 724
@@ -399,20 +462,27 @@ Window {
         color: "#323232"
     }
 
+    ///////////////////////////////////////////////////////////////// music_component
     Rectangle {
         id: music_component
         x: 438
-        y: 364
+        y: 363
         width: 526
         height: 106
         radius: 15
         color: "#323232"
-    }
 
-    // time view
-    //    TimeProvider{ // with qmlRegisterType
-    //        id: timeProvider
-    //    }
+        Rectangle {
+            id: album_cover
+            x: 16
+            y: 10
+            width: 86
+            height: 86
+            color: "transparent"
+        }
+
+
+    }
 
     Text {
         id: timeText
@@ -428,7 +498,6 @@ Window {
         onTimeChanged: timeText.text = timeProvider.currentTime
     }
 
-    // user name
     Rectangle{
         id: user_info
         color: "transparent"
@@ -623,5 +692,3 @@ Window {
     }
 
 }
-
-

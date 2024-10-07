@@ -4,6 +4,7 @@
 
 #include "basic_func.h"
 #include "weather_provider.h"
+#include "music_player.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +23,12 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("timeProvider", &timeProvider);
     engine.rootContext()->setContextProperty("speedProvider", &speedProvider);
     engine.rootContext()->setContextProperty("weatherProvider", &weatherProvider);
+
+    MusicPlayer player;
+    QStringList musicFileList = player.getMusicFromUSB();
+    if (!musicFileList.isEmpty()) {
+        player.playMusic("/media/llj/SanDisk/Music/" + musicFileList[3]); // musicFileList.first()
+    }
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

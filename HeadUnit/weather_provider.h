@@ -52,13 +52,14 @@ private slots:
     void onReplyFinished(QNetworkReply *reply) {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray response = reply->readAll();
+
             QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
             QJsonObject jsonObj = jsonDoc.object();
 
-            QJsonObject main = jsonObj.value("main").toObject();
+            QJsonObject main = jsonObj.value("main").toObject(); // main["temp"]
             m_temperature = QString::number(main.value("temp").toDouble()) + "°C";
 
-            QJsonArray weatherArray = jsonObj.value("weather").toArray();
+            QJsonArray weatherArray = jsonObj.value("weather").toArray(); // weather[0]["description"]
             if (!weatherArray.isEmpty()) {
                 m_description = weatherArray.first().toObject().value("description").toString();
             }
