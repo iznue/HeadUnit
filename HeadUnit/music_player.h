@@ -15,33 +15,64 @@ public:
         player = new QMediaPlayer(this);
     }
 
-    QStringList getMusicFromUSB(){
-        QDir usbDir("/media/llj/SanDisk/Music/");
-        QStringList filtering_m;
-        filtering_m << "*.mp3";
-        usbDir.setNameFilters(filtering_m);
-
+    QStringList getAlbums(const QString &dir_path, const QString filtering){
+        QDir usbDir(dir_path);
+        usbDir.setNameFilters(QStringList() << filtering);
         qDebug() << usbDir.entryList();
         return usbDir.entryList();
     }
-
-    QStringList getCoverFromUSB(){
-        QDir usbDir("/media/llj/SanDisk/Cover/");
-        QStringList filtering_c;
-        filtering_c << "*.jpeg";
-        usbDir.setNameFilters(filtering_c);
-
-        qDebug() << usbDir.entryList();
-        return usbDir.entryList();
+    QStringList getMusics() {
+        return getAlbums("/media/llj/SanDisk/Music/", "*.mp3");
     }
 
-    void playMusic(const QString &filePath){
-        player->setMedia(QUrl::fromLocalFile(filePath));
-        player->play();
+    QStringList getCovers() {
+        return getAlbums("/home/llj/catkin_ws/src/HeadUnit_Project/HeadUnit/Cover", "*.jpeg");
     }
 
-    void pauseMusic() {player->pause();}
-    void stopMusic() {player->stop();}
+    Q_INVOKABLE void setMusic(const QString &filePath){player->setMedia(QUrl::fromLocalFile(filePath));}
+
+    Q_INVOKABLE void playMusic(const QString &filePath){player->play();}
+    Q_INVOKABLE void pauseMusic() {player->pause();}
+    Q_INVOKABLE void stopMusic() {player->stop();}
+
+    Q_INVOKABLE bool playState() {return player->state() == QMediaPlayer::PlayingState;}
+
+    Q_INVOKABLE int music_duration() {return player->duration();}
+    Q_INVOKABLE int music_position() {return player->position();}
+
+    Q_INVOKABLE QString getCoverForSong(const QString &songTitle){
+        QStringList coverlist = getCovers();
+//        qDebug() << coverlist.last();
+        foreach (const QString &cover, coverlist){
+            if(cover.contains(songTitle.split("-")[0])){
+//                qDebug() << "qrc:/Cover/" + cover;
+                return "qrc:/Cover/" + cover;
+            }
+        } return QString();
+    }
+
+    Q_INVOKABLE QString getArtistForSong(const QString &songTitle){
+        qDebug() << songTitle.split("-")[0];
+        return songTitle.split("-")[0];
+    }
+
+    Q_INVOKABLE QString getTitleForSong(const QString &songTitle){
+        QString title = songTitle.split("-")[1];
+        title = title.split(".")[0];
+        title = title.replace("_", " ");
+//        qDebug() << song;
+        return title;
+    }
+
+    Q_INVOKABLE QString getPathForSong(const QString &songTitle){
+        QStringList musiclist = getMusics();
+        foreach (const QString &music, musiclist) {
+            if(music == songTitle){
+                qDebug() << "/media/llj/SanDisk/Music/" + music;
+                return "/media/llj/SanDisk/Music/" + music;
+            }
+        } return QString();
+    }
 
 private:
     QMediaPlayer *player;

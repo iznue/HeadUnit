@@ -36,6 +36,7 @@ if(ANDROID)
       basic_func.cpp
 
       qml.qrc
+      media_contents.qrc
     )
 else()
     add_executable(HeadUnit
@@ -47,6 +48,7 @@ else()
       basic_func.cpp
 
       qml.qrc
+      media_contents.qrc
     )
 endif()
 

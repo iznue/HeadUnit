@@ -643,7 +643,6 @@ Window {
 
     }
 
-
     Text {
         id: timeText
         x: 865

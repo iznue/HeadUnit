@@ -26,10 +26,21 @@
         <file>HU_Assets/Icons/user_phone.png</file>
         <file>HU_Assets/Icons/display.png</file>
         <file>HU_Assets/Icons/service.png</file>
+        <file>HU_Assets/Icons/bluetooth.png</file>
         
         <file>HU_Assets/Components/line.png</file>
         <file>HU_Assets/Components/battery.png</file>
+        
         <file>HU_Assets/Components/Weather/weather_bar.png</file>
         <file>HU_Assets/Components/Weather/climate_fan.png</file>
+        
+        <file>HU_Assets/Components/Music/music_button_ring.png</file>
+        <file>HU_Assets/Components/Music/play.png</file>
+        <file>HU_Assets/Components/Music/skip_back.png</file>
+        <file>HU_Assets/Components/Music/skip_back2.png</file>
+        <file>HU_Assets/Components/Music/skip_front.png</file>
+        <file>HU_Assets/Components/Music/skip_front2.png</file>
+        <file>HU_Assets/Components/Music/stop.png</file>
+        
     </qresource>
 </RCC>

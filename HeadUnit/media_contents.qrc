@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+    	<!-- music -->
+    	<file>Cover/AimeeCarty-cover.jpeg</file>
+    	<file>Cover/AlainaCastillo-cover.jpeg</file>
+    	<file>Cover/DAY6-cover.jpeg</file>
+    	<file>Cover/Hanumankind-cover.jpeg</file>
+    </qresource>
+</RCC>

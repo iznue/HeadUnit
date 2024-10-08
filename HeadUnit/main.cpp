@@ -20,15 +20,16 @@ int main(int argc, char *argv[])
     TimeProvider timeProvider;
     SpeedProvider speedProvider;
     WeatherProvider weatherProvider;
+    MusicPlayer musicPlayer;
+
     engine.rootContext()->setContextProperty("timeProvider", &timeProvider);
     engine.rootContext()->setContextProperty("speedProvider", &speedProvider);
     engine.rootContext()->setContextProperty("weatherProvider", &weatherProvider);
+    engine.rootContext()->setContextProperty("musicPlayer", &musicPlayer);
 
-    MusicPlayer player;
-    QStringList musicFileList = player.getMusicFromUSB();
-    if (!musicFileList.isEmpty()) {
-        player.playMusic("/media/llj/SanDisk/Music/" + musicFileList[3]); // musicFileList.first()
-    }
+//    // music test
+//    QString songtitle = "Hanumankind-Big_Dawgs.mp3";
+//    musicPlayer.playMusic(musicPlayer.getPathForSong(songtitle));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
