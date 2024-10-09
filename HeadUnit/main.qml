@@ -466,6 +466,13 @@ Window {
     property string songTitle: "Hanumankind-Big_Dawgs.mp3"
     property string musicPath: ""
 
+    function formatTime(ms){
+        var total_sec = Math.floor(ms / 1000);
+        var min = Math.floor(total_sec / 60);
+        var sec = total_sec % 60;
+        return min + ":" + (sec < 10 ? "0" + sec : sec);
+    }
+
     Rectangle {
         id: music_component
         x: 438
@@ -515,10 +522,11 @@ Window {
             color: "#87888C"
         }
 
+
         Row{
             id: music_menu
             x: 286
-            y: 19
+            y: 21
             spacing: 17
 
             Image {
@@ -610,28 +618,51 @@ Window {
         Rectangle {
             id: music_progress_bar
             x: 286
-            y: 88
+            y: 85
             width: 194
-            height: 3
+            height: 5
             radius: 3
             color: "#87888C"
-            Rectangle {
-                id: music_progress_fill
-                width: (musicPlayer.music_position() / musicPlayer.music_duration()) * music_progress_bar.width
-                height: 3
-                radius: 3
-                color: "#87F1D0"
+        }
+        Rectangle {
+            id: music_progress_fill
+            width: (musicPlayer.music_position() / musicPlayer.music_duration()) * music_progress_bar.width
+            height: music_progress_bar.height
+            anchors{
+                left: music_progress_bar.left
+                verticalCenter: music_progress_bar.verticalCenter
+            }
+            radius: 3
+            color: "#87F1D0"
+        }
+
+        Text {
+            id: music_start
+            x: 288
+            y: 64
+            text: formatTime(musicPlayer.music_position()) // "0:00"
+            color: "#ffffff"
+            font.pixelSize: 12
+        }
+        Text {
+            id: music_end
+            x: 456
+            y: 64
+            text: formatTime(musicPlayer.music_duration())
+            color: "#ffffff"
+            font.pixelSize: 12
+        }
+
+        Connections {
+            target: musicPlayer
+            onMusicProgressChanged: {
+//                console.log(musicPlayer.music_position());
+//                console.log(musicPlayer.music_duration());
+                music_progress_fill.width = (parseFloat(musicPlayer.music_position() / musicPlayer.music_duration()) * music_progress_bar.width)
+                music_start.text = formatTime(musicPlayer.music_position())
+                music_end.text = formatTime(musicPlayer.music_duration())
             }
         }
-        //        Timer{
-        //            id: update_music
-        //            interval: 1000
-        //            running: true
-        //            repeat: true
-        //            onTimeout: {
-        //                music_progress_fill.width = (musicPlayer.music_position() / musicPlayer.music_duration()) * music_progress_bar.width;
-        //            }
-        //        }
 
         Image {
             id: bluetooth_button
@@ -640,9 +671,7 @@ Window {
             fillMode: Image.PreserveAspectFit
             source: "HU_Assets/Icons/bluetooth.png"
         }
-
     }
-
 
     Text {
         id: timeText
@@ -688,7 +717,6 @@ Window {
             color: "#ffffff"
             font.pixelSize: 15
         }
-
     }
 
     /////////////////////////////////////////////////////////////////////// main control bar
@@ -855,6 +883,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:49;invisible:true}D{i:50;invisible:true}D{i:57;invisible:true}
+    D{i:57;invisible:true}
 }
 ##^##*/

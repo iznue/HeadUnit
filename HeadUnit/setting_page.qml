@@ -49,7 +49,7 @@ Window{
                     width: 61
                     height: 22
                     text: qsTr("Setting")
-                    font.pixelSize: 18
+                    font.pixelSize: 20
                     color: "#ffffff"
                     anchors{
                         verticalCenter: setting.verticalCenter

@@ -9,11 +9,15 @@
 
 class MusicPlayer : public QObject{
     Q_OBJECT
+    Q_PROPERTY(QString musicProgress READ musicProgress NOTIFY musicProgressChanged)
 
 public:
-    explicit MusicPlayer(QObject *parent = nullptr) : QObject(parent){
+    explicit MusicPlayer(QObject *parent = nullptr) : QObject(parent), m_progress(0){
         player = new QMediaPlayer(this);
+        connect(player, &QMediaPlayer::positionChanged, this, &MusicPlayer::updateProgress);
     }
+
+    QString musicProgress() const {return QString::number(m_progress);}
 
     QStringList getAlbums(const QString &dir_path, const QString filtering){
         QDir usbDir(dir_path);
@@ -52,7 +56,7 @@ public:
     }
 
     Q_INVOKABLE QString getArtistForSong(const QString &songTitle){
-        qDebug() << songTitle.split("-")[0];
+//        qDebug() << songTitle.split("-")[0];
         return songTitle.split("-")[0];
     }
 
@@ -68,14 +72,28 @@ public:
         QStringList musiclist = getMusics();
         foreach (const QString &music, musiclist) {
             if(music == songTitle){
-                qDebug() << "/media/llj/SanDisk/Music/" + music;
+//                qDebug() << "/media/llj/SanDisk/Music/" + music;
                 return "/media/llj/SanDisk/Music/" + music;
             }
         } return QString();
     }
 
+signals:
+    void musicProgressChanged();
+
+private slots:
+    // occurs when positionChanged signal called - calculate music progress
+    void updateProgress(){
+        if(player->duration() >0){
+            //m_progress = QString::number((position * 100) / player->duration());
+            m_progress = (player->position() * 100) / player->duration();
+            emit musicProgressChanged();
+        }
+    }
+
 private:
     QMediaPlayer *player;
+    int m_progress; // range : 0~100
 };
 
 #endif // MUSIC_PLAYER_H

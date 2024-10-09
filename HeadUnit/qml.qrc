@@ -22,12 +22,6 @@
         <file>HU_Assets/Icons/icon_line.png</file>
         <file>HU_Assets/Icons/tap_close_button.png</file>
         
-        <!-- setting page -->
-        <file>HU_Assets/Icons/user_phone.png</file>
-        <file>HU_Assets/Icons/display.png</file>
-        <file>HU_Assets/Icons/service.png</file>
-        <file>HU_Assets/Icons/bluetooth.png</file>
-        
         <file>HU_Assets/Components/line.png</file>
         <file>HU_Assets/Components/battery.png</file>
         
@@ -42,5 +36,13 @@
         <file>HU_Assets/Components/Music/skip_front2.png</file>
         <file>HU_Assets/Components/Music/stop.png</file>
         
+        <!-- setting page -->
+        <file>HU_Assets/Icons/user_phone.png</file>
+        <file>HU_Assets/Icons/display.png</file>
+        <file>HU_Assets/Icons/service.png</file>
+        <file>HU_Assets/Icons/bluetooth.png</file>
+        
+        <!-- music page -->
+        <file>HU_Assets/Background/music_bar.png</file>
     </qresource>
 </RCC>
